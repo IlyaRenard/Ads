@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+
+    <mat-card-title-group>
+        <mat-card-title>
+            <a routerLink="/ad" routerLinkActive="active">
+                {{ad.title}}
+            </a>
+        </mat-card-title>
+        <mat-card-subtitle>{{ad.price | currency}}</mat-card-subtitle>
+        <img class="ad-img" mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+        <mat-icon aria-hidden="false" (click)="addToFavorite()">favorite</mat-icon>
+    </mat-card-title-group>
+    <mat-card-content>
+        {{ad.description}}
+    </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,26 @@
+<mat-card class="box">
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <img class="profileImg" src="../../../assets/userProfile.png" />
+        <div fxLayout.gt-lg="column">
+            <mat-card-title class="name-title">{{profile.name}}</mat-card-title>
+            <mat-card-title class="name-title">{{profile.email}}</mat-card-title>
+            <mat-card-title class="name-title">{{profile.phoneNumber}}</mat-card-title>
+        </div>
+
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end end">
+        <a mat-stroked-button color="accent" class="btn-block" routerLink="/editProfile" routerLinkActive="active" fxLayoutAlign="end end">Edit</a>
+    </div>
+
+</mat-card>
+
+<mat-tab-group class="">
+    <mat-tab label="Favorite Ads">
+        <mat-card-title class="name-title">Favorite Ads</mat-card-title>
+        <app-ad-prewiew></app-ad-prewiew>
+    </mat-tab>
+    <mat-tab label="My Ads">
+        <mat-card-title class="name-title">My Ads</mat-card-title>
+        <app-ad-prewiew></app-ad-prewiew>
+    </mat-tab>
+</mat-tab-group>
