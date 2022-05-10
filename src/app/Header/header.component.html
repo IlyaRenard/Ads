@@ -1,9 +1,20 @@
-<mat-toolbar color="primary" class="app-header">
+<!-- <mat-toolbar color="primary" class="app-header">
     <span class="nav-tool-items">
     <a mat-button routerLink="" routerLinkActive="active">Home</a>
-    <a mat-button routerLink="addAd" routerLinkActive="active">Add ad</a>
-    <a mat-button routerLink="profile" routerLinkActive="active">Profile</a>
-    <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
-    <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
+    <a mat-button *ngIf="this.authService.userData" routerLink="addAd" routerLinkActive="active">Add ad</a>
+    <a mat-button *ngIf="this.authService.userData" routerLink="profile" routerLinkActive="active">Profile</a>
+    <a mat-button *ngIf="!this.authService.userData" routerLink="login" routerLinkActive="active">Log in</a>
+    <a mat-button *ngIf="!this.authService.userData" mat-raised-button routerLink="register"
+      routerLinkActive="active">Register</a>
   </span>
+</mat-toolbar>
+ -->
+<mat-toolbar color="primary" class="app-header">
+    <span class="nav-tool-items" *ngFor="let header of headerConfig">
+      
+    <a mat-button routerLink={{header.routerPath}} routerLinkActive="active">{{header.title}}</a>
+  </span>
+    <mat-form-field>
+        <input type="text" matInput placeholder="Search" [(ngModel)]="searchField" (keyup.enter)="search()">
+    </mat-form-field>
 </mat-toolbar>

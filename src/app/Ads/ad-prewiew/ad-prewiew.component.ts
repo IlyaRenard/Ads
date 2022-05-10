@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AdsService } from 'src/app/Services/ads.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Ad } from 'src/app/Models/ad.model';
 
 @Component({
   selector: 'app-ad-prewiew',
@@ -8,24 +8,21 @@ import { AdsService } from 'src/app/Services/ads.service';
 })
 export class AdPrewiewComponent implements OnInit {
 
-  
-
-  constructor(private adsService: AdsService) { }
-
-  ad: any = this.adsService.getData();
+  @Input() ad: Ad = {
+    title: "title",
+    price: 1,
+    description: "description",
+    photoUrl: "photo",
+    date: "date"
+  }
 
   ngOnInit(): void {
+
   }
 
   addToFavorite() {
-    if (!this.ad.isFavorite) {
-      this.ad.isFavorite = true;
-      console.log("add to favorite");
-    }
-    else {
-      this.ad.isFavorite = false
-      console.log("remove favorite");
-    }
+    console.log('Add');
+
 
   }
 }

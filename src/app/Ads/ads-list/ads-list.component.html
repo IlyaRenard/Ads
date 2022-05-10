@@ -1,5 +1,11 @@
-<mat-card class="example-card">
+<mat-card ngClass="table-list">
 
-    <app-ad-prewiew></app-ad-prewiew>
+    <mat-card *ngFor="let ad of ads$|async; let i = index" (click)="adDetail(ad)" routerLink="/ad/{{ad.id}}">
+        <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
+    </mat-card>
+
+    <mat-card *ngFor="let ad of searchAd$|async; let i = index" (click)="adDetail(ad)" routerLink="/ad/{{ad.id}}">
+        <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
+    </mat-card>
 
 </mat-card>

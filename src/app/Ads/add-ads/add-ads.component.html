@@ -1,127 +1,159 @@
-<mat-card class="box" fxLayout="column" fxLayoutAlign="space-around start">
+<label>
+    <input
+      type="file"
+      class="text-nowrap text-truncate"
+      (change)="selectFile($event)"
+    />
+  </label>
+
+<button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+    Upload
+  </button>
+
+<div *ngIf="currentFileUpload" class="progress mt-2">
+    <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
+        {{ percentage }}%
+    </div>
+</div>
+
+
+<mat-card class="box" fxLayout="column" fxLayoutAlign="center center">
     <mat-card-header>
         <mat-card-title>Add ad</mat-card-title>
     </mat-card-header>
     <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
-        <input matInput>
+        <input matInput required [(ngModel)]="ad.title">
     </mat-form-field>
 
     <div>
-        <h4>Category</h4>
         <mat-form-field appearance="fill">
-            <mat-label>Category</mat-label>
-            <mat-select matNativeControl required [(ngModel)]="selectedCategory">
-                <mat-option value="Realty">Realty</mat-option>
-                <mat-option value="Computer">Computer</mat-option>
+            <mat-label>Location</mat-label>
+            <mat-select matNativeControl required [(ngModel)]="ad.location">
+                <mat-option value="Brest">Brest</mat-option>
+                <mat-option value="Vitebsk">Vitebsk</mat-option>
+                <mat-option value="Gomel">Gomel</mat-option>
+                <mat-option value="Grodno">Grodno</mat-option>
+                <mat-option value="Minsk">Minsk</mat-option>
+                <mat-option value="Mogilev">Mogilev</mat-option>
             </mat-select>
         </mat-form-field>
-        <div *ngIf="selectedCategory==='Realty'">
-            <mat-form-field appearance="fill">
-                <mat-label>Type Deal</mat-label>
-                <mat-select matNativeControl required>
-                    <mat-option value="Rent">Rent</mat-option>
-                    <mat-option value="Sale">Sale</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div *ngIf="selectedCategory==='Realty'">
-            <mat-form-field appearance="fill">
-                <mat-label>Type of House</mat-label>
-                <mat-select matNativeControl required [(ngModel)]="selectedTypeRealty">
-                    <mat-option value="Flat">Flat</mat-option>
-                    <mat-option value="House">House</mat-option>
-                    <mat-option value="Ground">Ground</mat-option>
-                    <mat-option value="Garage">Garage</mat-option>
-                    <mat-option value="Commercial realty">Commercial Realty</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div *ngIf="
+    </div>
+
+
+    <h4>Category</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select matNativeControl required [(ngModel)]="selectedCategory" [(ngModel)]="ad.category">
+            <mat-option value="Realty">Realty</mat-option>
+            <mat-option value="Computer">Computer</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div *ngIf="selectedCategory==='Realty'">
+        <mat-form-field appearance="fill">
+            <mat-label>Type Deal</mat-label>
+            <mat-select matNativeControl required [(ngModel)]="ad.typeDeal">
+                <mat-option value="Rent">Rent</mat-option>
+                <mat-option value="Sale">Sale</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="selectedCategory==='Realty'">
+        <mat-form-field appearance="fill">
+            <mat-label>Type of House</mat-label>
+            <mat-select matNativeControl required [(ngModel)]="selectedTypeRealty" [(ngModel)]="ad.typeHouse">
+                <mat-option value="Flat">Flat</mat-option>
+                <mat-option value="House">House</mat-option>
+                <mat-option value="Ground">Ground</mat-option>
+                <mat-option value="Garage">Garage</mat-option>
+                <mat-option value="Commercial realty">Commercial Realty</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="
                     selectedTypeRealty === typeRealty.flat ||
                     selectedTypeRealty === typeRealty.house ||
                     selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
-            <p>Count rooms:
-                <mat-button-toggle-group name="countRooms" aria-label="Font Style">
-                    <mat-button-toggle value="1">1</mat-button-toggle>
-                    <mat-button-toggle value="2">2</mat-button-toggle>
-                    <mat-button-toggle value="3">3</mat-button-toggle>
-                    <mat-button-toggle value="4">4</mat-button-toggle>
-                    <mat-button-toggle value="5 and more">5 and more</mat-button-toggle>
-                </mat-button-toggle-group>
-            </p>
-        </div>
-        <div *ngIf="selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
-            <h4>Type of commercial</h4>
-            <mat-form-field appearance="fill">
-                <mat-label>Type of commercial</mat-label>
-                <mat-select matNativeControl>
-                    <mat-option value="Office">Office</mat-option>
-                    <mat-option value="Shops, commercial premises">Shops, commercial premises</mat-option>
-                    <mat-option value="Industrial premises">Industrial premises</mat-option>
-                    <mat-option value="Storage">Storage</mat-option>
-                    <mat-option value="Other commercial">Other commercial</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div *ngIf="
+        <p>Count rooms:
+            <mat-button-toggle-group name="countRooms" aria-label="Font Style" [(ngModel)]="ad.countRooms">
+                <mat-button-toggle value="1">1</mat-button-toggle>
+                <mat-button-toggle value="2">2</mat-button-toggle>
+                <mat-button-toggle value="3">3</mat-button-toggle>
+                <mat-button-toggle value="4">4</mat-button-toggle>
+                <mat-button-toggle value="5 and more">5 and more</mat-button-toggle>
+            </mat-button-toggle-group>
+        </p>
+    </div>
+    <div *ngIf="selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
+        <h4>Type of commercial</h4>
+        <mat-form-field appearance="fill">
+            <mat-label>Type of commercial</mat-label>
+            <mat-select matNativeControl [(ngModel)]="ad.typeCommercial">
+                <mat-option value="Office">Office</mat-option>
+                <mat-option value="Shops, commercial premises">Shops, commercial premises</mat-option>
+                <mat-option value="Industrial premises">Industrial premises</mat-option>
+                <mat-option value="Storage">Storage</mat-option>
+                <mat-option value="Other commercial">Other commercial</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="
                     selectedTypeRealty === typeRealty.house ||
                     selectedTypeRealty === typeRealty.ground" ngDefaultControl>
-            <mat-form-field appearance="fill">
-                <mat-label>Land area</mat-label>
-                <input matInput type="number" placeholder="Land area">
-            </mat-form-field>
-        </div>
-        <div *ngIf="selectedTypeRealty" ngDefaultControl>
-            <mat-form-field appearance="fill">
-                <mat-label>Total area</mat-label>
-                <input matInput type="number" placeholder="Total area">
-            </mat-form-field>
-        </div>
-        <div *ngIf="
+        <mat-form-field appearance="fill">
+            <mat-label>Land area</mat-label>
+            <input matInput type="number" placeholder="Land area" [(ngModel)]="ad.landArea">
+        </mat-form-field>
+    </div>
+    <div *ngIf="selectedTypeRealty" ngDefaultControl>
+        <mat-form-field appearance="fill">
+            <mat-label>Total area</mat-label>
+            <input matInput type="number" placeholder="Total area" [(ngModel)]="ad.totalArea">
+        </mat-form-field>
+    </div>
+    <div *ngIf="
                     selectedTypeRealty === typeRealty.flat ||
                     selectedTypeRealty === typeRealty.house" ngDefaultControl>
-            <mat-form-field appearance="fill">
-                <mat-label>Living space</mat-label>
-                <input matInput type="number" placeholder="Living space">
-            </mat-form-field>
-        </div>
-        <div *ngIf="
+        <mat-form-field appearance="fill">
+            <mat-label>Living space</mat-label>
+            <input matInput type="number" placeholder="Living space" [(ngModel)]="ad.livingSpace">
+        </mat-form-field>
+    </div>
+    <div *ngIf="
                     selectedTypeRealty === typeRealty.flat ||
                     selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
-            <mat-form-field appearance="fill">
-                <mat-label>Floor</mat-label>
-                <input matInput type="number" placeholder="Floor">
-            </mat-form-field>
-        </div>
-        <div *ngIf="
+        <mat-form-field appearance="fill">
+            <mat-label>Floor</mat-label>
+            <input matInput type="number" placeholder="Floor" [(ngModel)]="ad.floor">
+        </mat-form-field>
+    </div>
+    <div *ngIf="
                     selectedTypeRealty === typeRealty.flat ||
                     selectedTypeRealty === typeRealty.house ||
                     selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
-            <mat-form-field appearance="fill">
-                <mat-label>Floors of the house</mat-label>
-                <input matInput type="number" placeholder="Floors of the house">
-            </mat-form-field>
-        </div>
-        <div *ngIf="
+        <mat-form-field appearance="fill">
+            <mat-label>Floors of the house</mat-label>
+            <input matInput type="number" placeholder="Floors of the house" [(ngModel)]="ad.floorsHouse">
+        </mat-form-field>
+    </div>
+    <div *ngIf="
                     selectedTypeRealty === typeRealty.flat || 
                     selectedTypeRealty === typeRealty.house" ngDefaultControl>
-            <mat-form-field appearance="fill">
-                <mat-label>Year of constraction</mat-label>
-                <input matInput type="number" placeholder="Year of constraction">
-            </mat-form-field>
-        </div>
-
+        <mat-form-field appearance="fill">
+            <mat-label>Year of constraction</mat-label>
+            <input matInput type="number" placeholder="Year of constraction" [(ngModel)]="ad.yearConstraction">
+        </mat-form-field>
     </div>
+
 
     <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput [(ngModel)]="ad.description"></textarea>
     </mat-form-field>
 
     <mat-form-field appearance="fill" floatLabel="always">
         <mat-label>Price</mat-label>
-        <input matInput type="number" class="example-right-align" placeholder="0">
+        <input matInput type="number" class="example-right-align" placeholder="0" [(ngModel)]="ad.price">
         <span matPrefix>$&nbsp;</span>
     </mat-form-field>
 

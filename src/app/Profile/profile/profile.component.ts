@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,15 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  public profile= {
-    name:'Ilya',
-    email:'ilya.gavrilik@gmail.com',
-    phoneNumber:'+375298852785'
+  currentUser: any;
+
+  public profile = {
+    displayName: 'Ilya',
+    email: 'ilya.gavrilik@gmail.com',
+    phoneNumber: '298852785'
   };
 
-  constructor() { }
+  constructor(public authService: AuthService) {
+    this.GetUserData()
+  }
 
   ngOnInit(): void {
+
+  }
+
+  GetUserData() {
+    return this.authService.GetUserDataSuccses().subscribe((response) => {
+      this.currentUser = response;
+    })
   }
 
 }

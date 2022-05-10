@@ -108,6 +108,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "Ads:build:production",
+            "firebaseProject": "my-ads-c68dd",
+            "firebaseHostingSite": "my-ads-c68dd"
+          }
         }
       }
     }

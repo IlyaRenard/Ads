@@ -1,0 +1,83 @@
+<mat-card *ngIf="ad$|async as ad" class="card" fxLayout="column" fxLayoutAlign="space-between none">
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <img class="ad-img" mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+    </div>
+    <mat-card-title-group fxLayout="column" fxLayoutAlign="space-between stretch">
+        <mat-card-title>{{ad.title}}</mat-card-title>
+        <mat-card-title>{{ad.price| currency}}</mat-card-title>
+        <mat-card-subtitle>{{ad.location}}</mat-card-subtitle>
+        <mat-card-subtitle>{{ad.date}}</mat-card-subtitle>
+
+    </mat-card-title-group>
+
+    <mat-card *ngIf="ad.category == 'Realty'">
+        <mat-card-title>
+            Characteristics
+        </mat-card-title>
+        <div fxLayout="column" fxLayoutAlign="space-around start">
+            <div class="characterisrics">
+                <div class="char-title">Type deal</div><span class="span-char"></span>
+                <div class="char-info">{{ad.typeDeal}}</div>
+            </div>
+            <div class="characterisrics">
+                <div class="char-title">Type of House</div><span class="span-char"></span>
+                <div class="char-info">{{ad.typeHouse}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse ==='Commercial Realty'">
+                <div class="char-title">Type of commercial</div><span class="span-char"></span>
+                <div class="char-info">{{ad.typeCommercial}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse ==='Commercial Realty' || ad.typeHouse === 'Flat' || ad.typeHouse === 'House'">
+                <div class="char-title">Count rooms</div><span class="span-char"></span>
+                <div class="char-info">{{ad.countRooms}}</div>
+            </div>
+            <div class="characterisrics">
+                <div class="char-title">Total area</div><span class="span-char"></span>
+                <div class="char-info">{{ad.totalArea}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse === 'Ground' || ad.typeHouse === 'House'">
+                <div class="char-title">Land area</div><span class="span-char"></span>
+                <div class="char-info">{{ad.landArea}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse=== 'Flat' || ad.typeHouse === 'House'">
+                <div class="char-title">Living space</div><span class="span-char"></span>
+                <div class="char-info">{{ad.livingSpace}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse=== 'Flat' || ad.typeHouse=== 'Commercial Realry'">
+                <div class="char-title">Floor</div><span class="span-char"></span>
+                <div class="char-info">{{ad.floor}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse==='Commercial Realty' || ad.typeHouse === 'Flat' || ad.typeHouse === 'House'">
+                <div class="char-title">Floor of the house</div><span class="span-char"></span>
+                <div class="char-info">{{ad.floorsHouse}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse === 'Flat' || ad.typeHouse ==='House'">
+                <div class="char-title">Year of construction</div><span class="span-char"></span>
+                <div class="char-info">{{ad.yearConstraction}}</div>
+            </div>
+        </div>
+
+    </mat-card>
+    <mat-card fxLayout="column">
+        <mat-card-title>
+            Description
+        </mat-card-title>
+        <mat-card-content>
+            {{ad.description}}
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card fxLayout="column" fxLayoutAlign="space-between start">
+        <mat-card-title>
+            About the seller
+        </mat-card-title>
+        <div fxLayout="row" fxLayoutAlign="start start">
+            <img class="profileImg" src="../../../assets/userProfile.png" />
+            <mat-card-title class="seller-name">Name</mat-card-title>
+        </div>
+
+        <p>Email: </p>
+        <p>Count of Ads: </p>
+    </mat-card>
+
+</mat-card>

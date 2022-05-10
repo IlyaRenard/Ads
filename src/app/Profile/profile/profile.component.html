@@ -1,13 +1,19 @@
 <mat-card class="box">
+
+    <div fxLayout="row" fxLayoutAlign="end start">
+        <a mat-raised-button class="btn-block" routerLink="/login" routerLinkActive="active" fxLayoutAlign="end start" (click)="authService.SignOut()">
+            Sign Out
+        </a>
+    </div>
     <div fxLayout="row" fxLayoutAlign="center center">
         <img class="profileImg" src="../../../assets/userProfile.png" />
         <div fxLayout.gt-lg="column">
-            <mat-card-title class="name-title">{{profile.name}}</mat-card-title>
-            <mat-card-title class="name-title">{{profile.email}}</mat-card-title>
-            <mat-card-title class="name-title">{{profile.phoneNumber}}</mat-card-title>
+            <mat-card-title class="name-title">{{currentUser.displayName}}</mat-card-title>
+            <mat-card-title class="name-title">{{currentUser.email}}</mat-card-title>
+            <mat-card-title class="name-title">+375{{currentUser.phoneNumber}}</mat-card-title>
         </div>
-
     </div>
+
     <div fxLayout="row" fxLayoutAlign="end end">
         <a mat-stroked-button color="accent" class="btn-block" routerLink="/editProfile" routerLinkActive="active" fxLayoutAlign="end end">Edit</a>
     </div>

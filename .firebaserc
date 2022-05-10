@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "my-ads-c68dd": {
+      "hosting": {
+        "Ads": [
+          "my-ads-c68dd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "my-ads-c68dd"
+  }
+}

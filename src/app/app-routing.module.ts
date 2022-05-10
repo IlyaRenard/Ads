@@ -15,7 +15,8 @@ const routes: Routes = [
 { path: 'profile', component: ProfileComponent },
 { path: 'editProfile', component: EditProfileComponent },
 { path: 'addAd', component: AddAdsComponent },
-{ path: 'ad', component: AdComponent },
+{ path: 'ad/:selectedIndex', component: AdComponent },
+{ path: 'search/:searchField', component: AdsListComponent },
 ];
 
 @NgModule({

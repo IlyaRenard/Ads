@@ -1,0 +1,76 @@
+.ad-img {
+    border-radius: 10px;
+    height: 400px;
+    width: auto;
+    overflow: hidden;
+}
+
+mat-card-title {
+    font-size: 24px;
+    padding: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+mat-card-content {
+    font-size: 16px;
+}
+
+.card {
+    //max-width: 45%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    gap: 20px;
+}
+
+.profileImg {
+    border: 4px solid #3f51b5;
+    padding: 2px;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.seller-name {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+mat-card mat-card {
+    margin-left: 10px;
+    background-color: #f2f3f4;
+}
+
+.char-title {
+    display: flex;
+    color: grey;
+    width: calc(30.5% - 5px);
+}
+
+.span-char {
+    border-bottom: 1px dotted #d9d9d9;
+    flex: 1;
+    margin-left: 8px;
+}
+
+.char-info {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.characterisrics {
+    display: flex;
+    align-items: flex-end;
+    width: calc(60% + 16px);
+    color: #262626;
+    padding: 4px 0;
+    font-size: 18px;
+}

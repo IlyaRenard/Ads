@@ -1,10 +1,30 @@
-.example-card {
-    max-width: 400px;
+.card {
+    //max-width: 45%;
     margin-bottom: 8px;
     margin-left: 10px;
 }
 
 .ad-img {
     border-radius: 10px;
-    margin-right: -123px;
+    //margin-right: -123px;
+}
+
+.favorite {
+    background-image: url('../../../assets/favorite.svg');
+    color: transparent;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.favorite:hover {
+    background-image: url('../../../assets/favorite-hover.svg');
+}
+
+.ad-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    min-width: 200px;
 }
