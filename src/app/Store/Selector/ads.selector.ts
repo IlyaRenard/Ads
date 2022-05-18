@@ -77,12 +77,6 @@ export const favoriteSelector = createSelector(
     (favorite: Array<Favorite>) => favorite
 )
 
-export const favADS = (uid: string) => createSelector(
-    favoriteSelector,
-    (favorite: Array<Favorite>) => {
-        return favorite.filter((item: any) => item.uid === uid);
-    }
-)
 
 export const favoriteAdsUserSelector = (uid: string) => createSelector(
     favoriteSelector,

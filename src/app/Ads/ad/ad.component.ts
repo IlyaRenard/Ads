@@ -39,7 +39,6 @@ export class AdComponent implements OnInit {
     const currentUser = window.localStorage.getItem('user');
     if(currentUser!=='null'){
       this.currentUserUid = JSON.parse(currentUser?currentUser:'null').uid;
-      console.log(this.currentUserUid);
     }
   }
 

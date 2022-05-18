@@ -19,23 +19,5 @@ export const addAdsSuccess = createAction(
     (ad: Ad) => ({ ad })
 );
 
-export const deleteAd = createAction(
-    '[Ad] Delete ad',
-    (adId: string) => ({ adId })
-);
 
-export const deleteAdSuccess = createAction(
-    '[Ad] Delete ad success',
-    (adId: string) => ({ adId })
-);
-
-export const updateAd = createAction(
-    '[Ad] Update ad',
-    (ad: Ad) => ({ ad })
-);
-
-export const updateAdSuccess = createAction(
-    '[Ad] Update ad success',
-    (ad: Ad) => ({ ad })
-);
 

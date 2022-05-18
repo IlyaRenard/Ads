@@ -22,6 +22,9 @@ export class SearchListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
+
   ngDoCheck() {    
     this.url = window.location.href;
     this.searchField = (this.url.split('/')[4]);

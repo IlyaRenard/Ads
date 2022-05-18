@@ -1,5 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -17,6 +16,7 @@ import { adsSelector } from 'src/app/Store/Selector/ads.selector';
 export class AdsListComponent implements OnInit {
 
   ads$ = this.store.pipe(select(adsSelector))
+  
   selectedIndex?: string;
   private routeSubscription?: Subscription;
   favoriteAds?: Favorite[];
@@ -25,8 +25,7 @@ export class AdsListComponent implements OnInit {
   constructor(
     private store: Store<AdsState>,
     private route: ActivatedRoute,
-    public adsService: AdsService,
-    private _snackBar: MatSnackBar) {
+    public adsService: AdsService,) {
     this.store.dispatch(getAds());
     this.routeSubscription = route.params.subscribe(params => this.selectedIndex = params['selectedIndex']);
     this.adsService.GetAllFavoriteAdsSuccess().subscribe(data => this.favoriteAds = data)
@@ -35,7 +34,6 @@ export class AdsListComponent implements OnInit {
   addToFavorite(aid?: any) {
     const uid: any = window.localStorage.getItem('user');
     const userId = JSON.parse(uid).uid;
-    console.log(userId, "- User ", aid, " Ad");
     const data = {
       uid: JSON.parse(uid).uid,
       aid: aid

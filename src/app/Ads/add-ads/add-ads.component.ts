@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Ad } from 'src/app/Models/ad.model';
-import { PhotoUpload } from 'src/app/Models/photoUpload';
 import { AuthService } from 'src/app/Services/auth.service';
 import { addAd } from 'src/app/Store/Actions/ad.action';
 import { adsSelector } from 'src/app/Store/Selector/ads.selector';
@@ -22,9 +21,6 @@ export class AddAdsComponent implements OnInit {
   ad: Ad = new Ad();
   ads$ = this.store.pipe(select(adsSelector))
 
-  selectedFiles?: FileList;
-  currentFileUpload?: PhotoUpload;
-  percentage = 0;
 
   constructor(
     private datepipe: DatePipe,
@@ -44,7 +40,7 @@ export class AddAdsComponent implements OnInit {
   typeComputer = {
     laptop: 'Laptop',
     computer: 'Computer',
-    component: 'component'
+    component: 'Component'
   }
 
   typeRealty = {

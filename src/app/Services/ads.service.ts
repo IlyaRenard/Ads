@@ -35,10 +35,10 @@ export class AdsService {
   AddAd(ads: Ad): any {
     return this.adsRef.add({ ...ads });
   }
-  UpdateAd(id: string, data: any): Promise<void> {
+  UpdateAd(id: string, data: any) {
     return this.adsRef.doc(id).update(data);
   }
-  DeleteAd(id: string): Promise<void> {
+  DeleteAd(id: string) {
     return this.adsRef.doc(id).delete();
   }
 

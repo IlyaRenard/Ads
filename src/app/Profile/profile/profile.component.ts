@@ -7,7 +7,7 @@ import { getUsers } from 'src/app/Store/Actions/user.action';
 import { AdsState } from 'src/app/Store/Reducers/ads.reducers';
 import { FavoriteState } from 'src/app/Store/Reducers/favorite.reducers';
 import { UserState } from 'src/app/Store/Reducers/user.reducer';
-import { favADS, favoriteAdsUserSelector, userAdsSelector, userSelector } from 'src/app/Store/Selector/ads.selector';
+import { favoriteAdsUserSelector, userAdsSelector, userSelector } from 'src/app/Store/Selector/ads.selector';
 
 @Component({
   selector: 'app-profile',

@@ -15,7 +15,6 @@ export class AdsEffects {
             ofType(getAds),
             exhaustMap(() =>
                 this.adsService.GetAllAdsSuccess().pipe(
-                    tap(console.log),
                     map((ads) => getAdsSuccess(ads)),
                     catchError(() => EMPTY)
                 )
@@ -28,7 +27,6 @@ export class AdsEffects {
             ofType(addAd),
             concatMap(({ ad }) =>
                 this.adsService.AddAd(ad).pipe(
-                    tap(console.log),
                     map((newAd: any) => addAdsSuccess(newAd)),
                     catchError(() => EMPTY)
                 )

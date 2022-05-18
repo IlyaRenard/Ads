@@ -9,6 +9,111 @@
         <mat-card-subtitle>{{ad.date}}</mat-card-subtitle>
     </mat-card-title-group>
 
+    <mat-card *ngIf="ad.category === 'Realty'">
+        <mat-card-title>
+            Characteristics
+        </mat-card-title>
+        <div fxLayout="column" fxLayoutAlign="space-around start">
+            <div class="characterisrics">
+                <div class="char-title">Type deal</div><span class="span-char"></span>
+                <div class="char-info">{{ad.typeDeal}}</div>
+            </div>
+            <div class="characterisrics">
+                <div class="char-title">Type of House</div><span class="span-char"></span>
+                <div class="char-info">{{ad.typeHouse}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse ==='Commercial Realty'">
+                <div class="char-title">Type of commercial</div><span class="span-char"></span>
+                <div class="char-info">{{ad.typeCommercial}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse ==='Commercial Realty' || ad.typeHouse === 'Flat' || ad.typeHouse === 'House'">
+                <div class="char-title">Count rooms</div><span class="span-char"></span>
+                <div class="char-info">{{ad.countRooms}}</div>
+            </div>
+            <div class="characterisrics">
+                <div class="char-title">Total area</div><span class="span-char"></span>
+                <div class="char-info">{{ad.totalArea}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse === 'Ground' || ad.typeHouse === 'House'">
+                <div class="char-title">Land area</div><span class="span-char"></span>
+                <div class="char-info">{{ad.landArea}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse=== 'Flat' || ad.typeHouse === 'House'">
+                <div class="char-title">Living space</div><span class="span-char"></span>
+                <div class="char-info">{{ad.livingSpace}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse=== 'Flat' || ad.typeHouse=== 'Commercial Realry'">
+                <div class="char-title">Floor</div><span class="span-char"></span>
+                <div class="char-info">{{ad.floor}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse==='Commercial Realty' || ad.typeHouse === 'Flat' || ad.typeHouse === 'House'">
+                <div class="char-title">Floor of the house</div><span class="span-char"></span>
+                <div class="char-info">{{ad.floorsHouse}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeHouse === 'Flat' || ad.typeHouse ==='House'">
+                <div class="char-title">Year of construction</div><span class="span-char"></span>
+                <div class="char-info">{{ad.yearConstraction}}</div>
+            </div>
+        </div>
+
+    </mat-card>
+
+    <mat-card *ngIf="ad.category === 'Computer'">
+        <mat-card-title>
+            Characteristics
+        </mat-card-title>
+        <div fxLayout="column" fxLayoutAlign="space-around start">
+            <div class="characterisrics">
+                <div class="char-title">Type deal</div><span class="span-char"></span>
+                <div class="char-info">{{ad.typeDeal}}</div>
+            </div>
+            <div class="characterisrics">
+                <div class="char-title">Type of Computer</div><span class="span-char"></span>
+                <div class="char-info">{{ad.typeComputer}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Laptop' || ad.typeComputer ==='Component'">
+                <div class="char-title">producer</div><span class="span-char"></span>
+                <div class="char-info">{{ad.producer}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Laptop'">
+                <div class="char-title">Screen Diagonal</div><span class="span-char"></span>
+                <div class="char-info">{{ad.screenDiagonal}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Laptop' || ad.typeComputer ==='Computer'">
+                <div class="char-title">Operating system</div><span class="span-char"></span>
+                <div class="char-info">{{ad.operatingSystem}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Laptop' || ad.typeComputer ==='Computer'">
+                <div class="char-title">Clock Frequency, GHz</div><span class="span-char"></span>
+                <div class="char-info">{{ad.clockFrequency}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Laptop' || ad.typeComputer ==='Computer'">
+                <div class="char-title">RAM</div><span class="span-char"></span>
+                <div class="char-info">{{ad.ram}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Laptop' || ad.typeComputer ==='Computer'">
+                <div class="char-title">GPU type</div><span class="span-char"></span>
+                <div class="char-info">{{ad.gpyType}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Laptop' || ad.typeComputer ==='Computer'">
+                <div class="char-title">GPU</div><span class="span-char"></span>
+                <div class="char-info">{{ad.gpu}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Laptop' || ad.typeComputer ==='Computer'">
+                <div class="char-title">Storage type</div><span class="span-char"></span>
+                <div class="char-info">{{ad.storageType}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.typeComputer ==='Component'">
+                <div class="char-title">Component type</div><span class="span-char"></span>
+                <div class="char-info">{{ad.componentType}}</div>
+            </div>
+            <div class="characterisrics" *ngIf="ad.category === 'Computer'">
+                <div class="char-title">Condition</div><span class="span-char"></span>
+                <div class="char-info">{{ad.condition}}</div>
+            </div>
+
+        </div>
+    </mat-card>
 
     <mat-card fxLayout="column">
         <mat-card-title>
@@ -18,6 +123,8 @@
             {{ad.description}}
         </mat-card-content>
     </mat-card>
+
+
 
     <mat-card *ngIf="user$|async as user" fxLayout="column" fxLayoutAlign="space-between start">
         <mat-card-title>

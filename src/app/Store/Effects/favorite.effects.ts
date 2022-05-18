@@ -14,7 +14,6 @@ export class FavoriteEffects {
             ofType(getFavorite),
             exhaustMap(() =>
                 this.adsService.GetAllFavoriteAdsSuccess().pipe(
-                    tap(console.log),
                     map((favoriteAds) => getFavoriteSuccess(favoriteAds)),
                     catchError(() => EMPTY)
                 )

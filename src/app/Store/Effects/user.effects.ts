@@ -14,7 +14,6 @@ export class UserEffects {
             ofType(getUsers),
             exhaustMap(() =>
                 this.authService.GetAllUserSuccess().pipe(
-                    tap(console.log),
                     map((users) => getUsersSuccess(users)),
                     catchError(() => EMPTY)
                 )
