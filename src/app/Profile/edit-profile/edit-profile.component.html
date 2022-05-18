@@ -1,10 +1,10 @@
-<mat-card class="box">
+<mat-card class="box" *ngIf="user$|async as user">
     <div fxLayout="row" fxLayoutAlign="center center">
         <div fxLayout.gt-lg="column">
             <mat-card-title class="name-title">Username</mat-card-title>
             <div>
                 <mat-form-field class="example-full-width" class="login-field">
-                    <input matInput placeholder="Username">
+                    <input matInput placeholder="Username" [value]="user.displayName" #displayName>
                 </mat-form-field>
             </div>
             <mat-card-title class="name-title">Phone</mat-card-title>
@@ -12,7 +12,7 @@
                 <mat-form-field class="example-full-width" appearance="fill" class="login-field">
                     <mat-label>Phone number</mat-label>
                     <span matPrefix>+375 &nbsp;</span>
-                    <input type="tel" matInput placeholder="29-885-27-85">
+                    <input type="number" matInput placeholder="29-885-27-85" [value]="user.phoneNumber" #phoneNumber>
                     <mat-icon matSuffix>mode_edit</mat-icon>
                 </mat-form-field>
             </form>
@@ -20,7 +20,7 @@
 
     </div>
     <div fxLayout="row" fxLayoutAlign="end end">
-        <a mat-stroked-button color="accent" class="btn-block" routerLink="/profile" (click)="editProfile()" routerLinkActive="active" fxLayoutAlign="end end">Save</a>
+        <a mat-stroked-button color="accent" class="btn-block" routerLink="/profile" (click)="editProfile(user.uid,displayName.value,phoneNumber.valueAsNumber)" routerLinkActive="active" fxLayoutAlign="end end">Save</a>
     </div>
 
 </mat-card>

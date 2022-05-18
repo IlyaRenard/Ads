@@ -6,7 +6,7 @@ import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { AdsListComponent } from "./ads-list/ads-list.component";
 import { adReducer } from "../Store/Reducers/ads.reducers";
-import { adsFeatureKey } from "../Store/Selector/ads.selector";
+import { adsFeatureKey, favoriteFeatureKey } from "../Store/Selector/ads.selector";
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AdsEffects } from "../Store/Effects/ads.effects";
 import { AdPrewiewComponent } from "./ad-prewiew/ad-prewiew.component";
@@ -16,18 +16,18 @@ import { AddAdsComponent } from "./add-ads/add-ads.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";
-
+import { AdsEditComponent } from './ads-edit/ads-edit.component';
+import { SearchListComponent } from './search-list/search-list.component';
+import { favoriteReducer } from "../Store/Reducers/favorite.reducers";
+import { FavoriteEffects } from "../Store/Effects/favorite.effects";
 
 
 @NgModule({
     imports: [
         CommonModule,
-        // StoreModule.forFeature(counterFeatureKey, counterReducer),
         StoreModule.forFeature(adsFeatureKey, adReducer),
         EffectsModule.forFeature([AdsEffects]),
-        StoreRouterConnectingModule.forRoot({
-            
-          }),
+        StoreRouterConnectingModule.forRoot({}),
         AngularMaterialModule,
         BrowserModule,
         FormsModule,
@@ -40,13 +40,16 @@ import { MatCardModule } from "@angular/material/card";
         AdsListComponent,
         AdPrewiewComponent,
         AdComponent,
-        AddAdsComponent
+        AddAdsComponent,
+        AdsEditComponent,
+        SearchListComponent
     ],
     exports: [
         AdsListComponent,
         AdPrewiewComponent,
         AdComponent,
-        AddAdsComponent
+        AddAdsComponent,
+        AdsEditComponent
     ]
 })
 export class AdsModule { }

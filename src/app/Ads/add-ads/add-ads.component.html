@@ -1,22 +1,3 @@
-<label>
-    <input
-      type="file"
-      class="text-nowrap text-truncate"
-      (change)="selectFile($event)"
-    />
-  </label>
-
-<button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-    Upload
-  </button>
-
-<div *ngIf="currentFileUpload" class="progress mt-2">
-    <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
-        {{ percentage }}%
-    </div>
-</div>
-
-
 <mat-card class="box" fxLayout="column" fxLayoutAlign="center center">
     <mat-card-header>
         <mat-card-title>Add ad</mat-card-title>
@@ -49,7 +30,7 @@
             <mat-option value="Computer">Computer</mat-option>
         </mat-select>
     </mat-form-field>
-    <div *ngIf="selectedCategory==='Realty'">
+    <div>
         <mat-form-field appearance="fill">
             <mat-label>Type Deal</mat-label>
             <mat-select matNativeControl required [(ngModel)]="ad.typeDeal">
@@ -58,6 +39,109 @@
             </mat-select>
         </mat-form-field>
     </div>
+
+    <div *ngIf="selectedCategory==='Computer'">
+        <mat-form-field appearance="fill">
+            <mat-label>Type of Computer</mat-label>
+            <mat-select matNativeControl required [(ngModel)]="selectedTypeComputer" [(ngModel)]="ad.typeComputer">
+                <mat-option value="Laptop">{{typeComputer.laptop}}</mat-option>
+                <mat-option value="Computer">{{typeComputer.computer}}</mat-option>
+                <mat-option value="Accessories">{{typeComputer.component}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field *ngIf="selectedTypeComputer === typeComputer.laptop || 
+                           selectedTypeComputer === typeComputer.component">
+        <mat-label>Producer</mat-label>
+        <input matInput [(ngModel)]="ad.producer">
+    </mat-form-field>
+
+    <div *ngIf="selectedTypeComputer === typeComputer.laptop">
+        <mat-form-field appearance="fill">
+            <mat-label>Screen Diagonal</mat-label>
+            <input matInput type="number" placeholder="Screen Diagonal" [(ngModel)]="ad.screenDiagonal">
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="selectedTypeComputer === typeComputer.laptop || selectedTypeComputer === typeComputer.computer">
+        <mat-form-field appearance="fill">
+            <mat-label>Operating system</mat-label>
+            <mat-select matNativeControl [(ngModel)]="ad.operatingSystem">
+                <mat-option value="Windows">Windows</mat-option>
+                <mat-option value="MacOs">MacOs</mat-option>
+                <mat-option value="Linux">Linux</mat-option>
+                <mat-option value="DOS">DOS</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field *ngIf="selectedTypeComputer === typeComputer.laptop || 
+                           selectedTypeComputer === typeComputer.computer">
+        <mat-label>CPU</mat-label>
+        <input matInput [(ngModel)]="ad.cpu">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selectedTypeComputer === typeComputer.laptop || 
+                           selectedTypeComputer === typeComputer.computer">
+        <mat-label>Clock Frequency, GHz</mat-label>
+        <input matInput type="number" placeholder="Clock Frequency, GHz" [(ngModel)]="ad.clockFrequency">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selectedTypeComputer === typeComputer.laptop || 
+                           selectedTypeComputer === typeComputer.computer">
+        <mat-label>RAM</mat-label>
+        <input matInput type="number" placeholder="RAM" [(ngModel)]="ad.ram">
+    </mat-form-field>
+
+    <div *ngIf="selectedTypeComputer === typeComputer.laptop || selectedTypeComputer === typeComputer.computer">
+        <mat-form-field appearance="fill">
+            <mat-label>GPU type</mat-label>
+            <mat-select matNativeControl [(ngModel)]="ad.gpyType">
+                <mat-option value="Dedicated">Dedicated</mat-option>
+                <mat-option value="Integrated">Integrated</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field *ngIf="selectedTypeComputer === typeComputer.laptop || 
+                           selectedTypeComputer === typeComputer.computer">
+        <mat-label>GPU</mat-label>
+        <input matInput [(ngModel)]="ad.gpu">
+    </mat-form-field>
+
+    <div *ngIf="selectedTypeComputer === typeComputer.laptop || selectedTypeComputer === typeComputer.computer">
+        <mat-form-field appearance="fill">
+            <mat-label>Storage type</mat-label>
+            <mat-select matNativeControl [(ngModel)]="ad.storageType">
+                <mat-option value="HDD">HDD</mat-option>
+                <mat-option value="SSD">SSD</mat-option>
+                <mat-option value="HDD + SSD">HDD + SSD</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field *ngIf="selectedTypeComputer === typeComputer.laptop || 
+                           selectedTypeComputer === typeComputer.computer">
+        <mat-label>Storage Capaciry</mat-label>
+        <input matInput type="number" placeholder="Storage Capaciry" [(ngModel)]="ad.storageCapacity">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selectedTypeComputer === typeComputer.component">
+        <mat-label>Component Type</mat-label>
+        <input matInput [(ngModel)]="ad.componentType">
+    </mat-form-field>
+
+    <div *ngIf="selectedCategory === 'Computer'">
+        <mat-form-field appearance="fill">
+            <mat-label>Condition</mat-label>
+            <mat-select matNativeControl [(ngModel)]="ad.condition">
+                <mat-option value="New">New</mat-option>
+                <mat-option value="Used">Used</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
     <div *ngIf="selectedCategory==='Realty'">
         <mat-form-field appearance="fill">
             <mat-label>Type of House</mat-label>
@@ -70,10 +154,9 @@
             </mat-select>
         </mat-form-field>
     </div>
-    <div *ngIf="
-                    selectedTypeRealty === typeRealty.flat ||
-                    selectedTypeRealty === typeRealty.house ||
-                    selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
+    <div *ngIf="selectedTypeRealty === typeRealty.flat ||
+                selectedTypeRealty === typeRealty.house ||
+                selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
         <p>Count rooms:
             <mat-button-toggle-group name="countRooms" aria-label="Font Style" [(ngModel)]="ad.countRooms">
                 <mat-button-toggle value="1">1</mat-button-toggle>
@@ -97,9 +180,8 @@
             </mat-select>
         </mat-form-field>
     </div>
-    <div *ngIf="
-                    selectedTypeRealty === typeRealty.house ||
-                    selectedTypeRealty === typeRealty.ground" ngDefaultControl>
+    <div *ngIf="selectedTypeRealty === typeRealty.house ||
+                selectedTypeRealty === typeRealty.ground" ngDefaultControl>
         <mat-form-field appearance="fill">
             <mat-label>Land area</mat-label>
             <input matInput type="number" placeholder="Land area" [(ngModel)]="ad.landArea">
@@ -111,34 +193,30 @@
             <input matInput type="number" placeholder="Total area" [(ngModel)]="ad.totalArea">
         </mat-form-field>
     </div>
-    <div *ngIf="
-                    selectedTypeRealty === typeRealty.flat ||
-                    selectedTypeRealty === typeRealty.house" ngDefaultControl>
+    <div *ngIf="selectedTypeRealty === typeRealty.flat ||
+                selectedTypeRealty === typeRealty.house" ngDefaultControl>
         <mat-form-field appearance="fill">
             <mat-label>Living space</mat-label>
             <input matInput type="number" placeholder="Living space" [(ngModel)]="ad.livingSpace">
         </mat-form-field>
     </div>
-    <div *ngIf="
-                    selectedTypeRealty === typeRealty.flat ||
-                    selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
+    <div *ngIf="selectedTypeRealty === typeRealty.flat ||
+                selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
         <mat-form-field appearance="fill">
             <mat-label>Floor</mat-label>
             <input matInput type="number" placeholder="Floor" [(ngModel)]="ad.floor">
         </mat-form-field>
     </div>
-    <div *ngIf="
-                    selectedTypeRealty === typeRealty.flat ||
-                    selectedTypeRealty === typeRealty.house ||
-                    selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
+    <div *ngIf="selectedTypeRealty === typeRealty.flat ||
+                selectedTypeRealty === typeRealty.house ||
+                selectedTypeRealty === typeRealty.commercialRealty" ngDefaultControl>
         <mat-form-field appearance="fill">
             <mat-label>Floors of the house</mat-label>
             <input matInput type="number" placeholder="Floors of the house" [(ngModel)]="ad.floorsHouse">
         </mat-form-field>
     </div>
-    <div *ngIf="
-                    selectedTypeRealty === typeRealty.flat || 
-                    selectedTypeRealty === typeRealty.house" ngDefaultControl>
+    <div *ngIf="selectedTypeRealty === typeRealty.flat || 
+                selectedTypeRealty === typeRealty.house" ngDefaultControl>
         <mat-form-field appearance="fill">
             <mat-label>Year of constraction</mat-label>
             <input matInput type="number" placeholder="Year of constraction" [(ngModel)]="ad.yearConstraction">

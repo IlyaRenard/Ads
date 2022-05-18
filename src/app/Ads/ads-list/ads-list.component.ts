@@ -1,11 +1,13 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { Ad } from 'src/app/Models/ad.model';
+import { Favorite } from 'src/app/Models/favorite.model';
+import { AdsService } from 'src/app/Services/ads.service';
 import { getAds } from 'src/app/Store/Actions/ad.action';
 import { AdsState } from 'src/app/Store/Reducers/ads.reducers';
-import { adsSelector, findAdByTitle } from 'src/app/Store/Selector/ads.selector';
+import { adsSelector } from 'src/app/Store/Selector/ads.selector';
 
 @Component({
   selector: 'app-ads-list',
@@ -17,28 +19,40 @@ export class AdsListComponent implements OnInit {
   ads$ = this.store.pipe(select(adsSelector))
   selectedIndex?: string;
   private routeSubscription?: Subscription;
+  favoriteAds?: Favorite[];
 
-  url:any;
-  searchField:any;
-  searchAd$:any;
 
-  constructor(private store: Store<AdsState>, private route: ActivatedRoute) {
+  constructor(
+    private store: Store<AdsState>,
+    private route: ActivatedRoute,
+    public adsService: AdsService,
+    private _snackBar: MatSnackBar) {
     this.store.dispatch(getAds());
     this.routeSubscription = route.params.subscribe(params => this.selectedIndex = params['selectedIndex']);
+    this.adsService.GetAllFavoriteAdsSuccess().subscribe(data => this.favoriteAds = data)
   }
 
-  ngDoCheck() {    
-   console.log(this.searchField);
-   this.url = window.location.href;
-   this.searchField = (this.url.split('/')[4]);
-   this.searchAd$ = this.store.pipe(select(findAdByTitle(this.searchField)));
+  addToFavorite(aid?: any) {
+    const uid: any = window.localStorage.getItem('user');
+    const userId = JSON.parse(uid).uid;
+    console.log(userId, "- User ", aid, " Ad");
+    const data = {
+      uid: JSON.parse(uid).uid,
+      aid: aid
+    }
+
+    if (!this.favoriteAds?.some(data => data.aid === aid && data.uid === userId)) {
+      alert('Add to favorite')
+      this.adsService.AddFavoriteAd(data)
+
+    }
+    else {
+      const id = this.favoriteAds.filter(data => data.aid === aid && data.uid === userId)[0].id;
+      this.adsService.DeleteFavoriteAd(id!);
+      alert('Remove from favorite')
+    }
+
   }
-
-
-  adDetail(ad: Ad): void {
-    console.log(ad.id);
-  }
-
 
   ngOnInit(): void {
 

@@ -8,7 +8,7 @@ import { Ad } from 'src/app/Models/ad.model';
 })
 export class AdPrewiewComponent implements OnInit {
 
-  @Input() ad: Ad = {
+  @Input() ad?: Ad = {
     title: "title",
     price: 1,
     description: "description",
@@ -20,9 +20,4 @@ export class AdPrewiewComponent implements OnInit {
 
   }
 
-  addToFavorite() {
-    console.log('Add');
-
-
-  }
 }

@@ -1,0 +1,12 @@
+<mat-card ngClass="table-list" *ngIf="searchAd$ !== null">
+
+    <div *ngFor="let ad of searchAd$|async; let i = index" routerLink="/ad/{{ad.id}}">
+        <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
+    </div>
+</mat-card>
+<mat-card ngClass="table-list" *ngIf="categoryFilter$ !== null">
+
+    <div *ngFor="let ad of categoryFilter$|async; let i = index" routerLink="/ad/{{ad.id}}">
+        <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
+    </div>
+</mat-card>

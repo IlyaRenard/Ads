@@ -1,18 +1,23 @@
 import { createReducer, on } from "@ngrx/store";
 import { Ad } from "src/app/Models/ad.model";
-import { addAdsSuccess, getAdsSuccess } from "../Actions/ad.action";
+import { addAdsSuccess, deleteAdSuccess, getAdsSuccess } from "../Actions/ad.action";
 
 
 export interface AdsState {
-  ads: ReadonlyArray<Ad>;
+  ads: Array<Ad>;
+
 }
 
-const initialState: ReadonlyArray<Ad> = [];
+const initialAdState: Array<Ad> = [];
 
 
 export const adReducer = createReducer(
-  initialState,
+  initialAdState,
   on(getAdsSuccess, (state, { ads }) => [...ads]),
   on(addAdsSuccess, (state, { ad }) => [...state, ad]),
+  on(deleteAdSuccess, (state, { adId }) => state.filter((ad) => ad.id !== adId)),
 
 )
+
+
+

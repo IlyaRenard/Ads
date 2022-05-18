@@ -2,6 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { User } from '../Models/user';
 
 @Injectable({
@@ -36,14 +37,14 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/profile']);
-
+          this.router.navigate(['/']);
         });
-
+        window.location.reload();
       })
       .catch((error) => {
         window.alert(error.message);
       });
+
   }
 
   SignUp(email: string, password: string, userName: string, phoneNumber: string) {
@@ -51,7 +52,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/']);
         });
         this.SetUserData(result.user, userName, phoneNumber);
       })
@@ -77,23 +78,28 @@ export class AuthService {
     });
   }
 
-  UpdateUserData(id: string, data: any): Promise<void> {
-    return this.userRef.doc(id).update(data);
-  }
-
-  GetAllUser(): AngularFirestoreCollection<User> {
+  GetAllUsers(): AngularFirestoreCollection<User> {
     return this.userRef;
   }
 
-  GetUserDataSuccses(){
-    const userId = JSON.parse(localStorage.getItem('user')!)
-    return this.GetAllUser().doc(userId.uid).valueChanges()||undefined;
+  GetAllUserSuccess() {
+    return this.GetAllUsers().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ ...c.payload.doc.data() })
+        )
+      )
+    )
+  }
+
+  UpdateUser(id: string, data: any): Promise<void> {
+    return this.userRef.doc(id).update(data);
   }
 
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      window.location.reload();
     });
   }
 }

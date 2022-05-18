@@ -1,11 +1,10 @@
 <mat-card ngClass="table-list">
-
-    <mat-card *ngFor="let ad of ads$|async; let i = index" (click)="adDetail(ad)" routerLink="/ad/{{ad.id}}">
-        <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
-    </mat-card>
-
-    <mat-card *ngFor="let ad of searchAd$|async; let i = index" (click)="adDetail(ad)" routerLink="/ad/{{ad.id}}">
-        <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
-    </mat-card>
-
+    <div *ngFor="let ad of ads$|async; let i = index">
+        <div fxLayout="column" fxLayoutAlign="end end">
+            <button class="favorite" (click)="addToFavorite(ad.id)"></button>
+        </div>
+        <div routerLink="/ad/{{ad.id}}">
+            <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
+        </div>
+    </div>
 </mat-card>

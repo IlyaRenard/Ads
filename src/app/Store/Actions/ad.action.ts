@@ -8,7 +8,7 @@ export const getAds = createAction(
 );
 export const getAdsSuccess = createAction(
     '[Ad] Get ad success',
-    (ads: ReadonlyArray<Ad>) => ({ ads })
+    (ads: Array<Ad>) => ({ ads })
 );
 export const addAd = createAction(
     '[Ad] Add ad',
@@ -38,3 +38,4 @@ export const updateAdSuccess = createAction(
     '[Ad] Update ad success',
     (ad: Ad) => ({ ad })
 );
+

@@ -3,3 +3,21 @@
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     gap: 10px;
 }
+
+.favorite {
+    background-image: url('../../../assets/favorite.svg');
+    color: transparent;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+}
+
+.favorite:hover {
+    background-image: url('../../../assets/favorite-hover.svg');
+}
+
+.favoriteTap {
+    background-image: url('../../../assets/favorite-hover.svg');
+}

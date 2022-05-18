@@ -2,16 +2,15 @@
 
     <mat-card-title-group>
         <mat-card-title class="ad-title">
-            {{ad.title}}
+            {{ad?.title}}
         </mat-card-title>
-        <mat-card-subtitle>{{ad.price | currency}}</mat-card-subtitle>
-        <span class="favorite" (click)="addToFavorite()"></span>
-        <img class="ad-img" mat-card-md-image src="{{ad.photoUrl}}">
+        <mat-card-subtitle>{{ad?.price | currency}}</mat-card-subtitle>
+        <img class="ad-img" mat-card-md-image src="{{ad?.photoUrl}}">
 
     </mat-card-title-group>
     <mat-card-content>
-        {{ad.description}}
+        {{ad?.description}}
     </mat-card-content>
-    <p>{{ad.date}}</p>
+    <p>{{ad?.date}}</p>
 
 </mat-card>

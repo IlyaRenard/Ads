@@ -1,0 +1,36 @@
+<mat-card *ngIf="ad$|async as ads" class="box" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-header>
+        <mat-card-title>Update ad</mat-card-title>
+    </mat-card-header>
+    <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput required [value]="ads.title" #title />
+    </mat-form-field>
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Location</mat-label>
+            <mat-select matNativeControl required [value]="ads.location" #location>
+                <mat-option value="Brest">Brest</mat-option>
+                <mat-option value="Vitebsk">Vitebsk</mat-option>
+                <mat-option value="Gomel">Gomel</mat-option>
+                <mat-option value="Grodno">Grodno</mat-option>
+                <mat-option value="Minsk">Minsk</mat-option>
+                <mat-option value="Mogilev">Mogilev</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput [value]="ads.description" #description></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" class="example-right-align" [value]="ads.price" #price />
+        <span matPrefix>$&nbsp;</span>
+    </mat-form-field>
+
+    <button mat-stroked-button color="accent" class="btn-block" (click)="update(ads.id,title.value,location.value,description.value,price.valueAsNumber)">Update Ad</button>
+</mat-card>

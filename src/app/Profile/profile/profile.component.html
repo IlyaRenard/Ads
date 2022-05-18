@@ -5,28 +5,35 @@
             Sign Out
         </a>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <img class="profileImg" src="../../../assets/userProfile.png" />
-        <div fxLayout.gt-lg="column">
-            <mat-card-title class="name-title">{{currentUser.displayName}}</mat-card-title>
-            <mat-card-title class="name-title">{{currentUser.email}}</mat-card-title>
-            <mat-card-title class="name-title">+375{{currentUser.phoneNumber}}</mat-card-title>
+    <div *ngIf="user$|async as user">
+
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <img class="profileImg" *ngIf="profile.photoUrl" [src]="profile.photoUrl" />
+            <div fxLayout.gt-lg="column">
+                <mat-card-title class="name-title">{{user.displayName}}</mat-card-title>
+                <mat-card-title class="name-title">{{user.email}}</mat-card-title>
+                <mat-card-title class="name-title">+375{{user.phoneNumber}}</mat-card-title>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="end end">
+            <a mat-stroked-button color="accent" class="btn-block" routerLink="/editProfile/{{user.uid}}" routerLinkActive="active" fxLayoutAlign="end end">Edit</a>
         </div>
     </div>
-
-    <div fxLayout="row" fxLayoutAlign="end end">
-        <a mat-stroked-button color="accent" class="btn-block" routerLink="/editProfile" routerLinkActive="active" fxLayoutAlign="end end">Edit</a>
-    </div>
-
 </mat-card>
 
 <mat-tab-group class="">
     <mat-tab label="Favorite Ads">
         <mat-card-title class="name-title">Favorite Ads</mat-card-title>
-        <app-ad-prewiew></app-ad-prewiew>
+        <mat-card *ngFor="let ad of favoriteAds$|async; let i = index" routerLink="/ad/{{ad?.id}}">
+            <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
+        </mat-card>
     </mat-tab>
     <mat-tab label="My Ads">
         <mat-card-title class="name-title">My Ads</mat-card-title>
-        <app-ad-prewiew></app-ad-prewiew>
+        <mat-card *ngFor="let ad of userAds$|async; let i = index" routerLink="/ad/{{ad.id}}">
+            <app-ad-prewiew [ad]="ad"></app-ad-prewiew>
+        </mat-card>
     </mat-tab>
 </mat-tab-group>

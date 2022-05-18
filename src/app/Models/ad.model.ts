@@ -1,3 +1,4 @@
+
 export class Ad {
     id?: string;
     uid?: string;
@@ -21,6 +22,20 @@ export class Ad {
     floor?: number;
     floorsHouse?: number;
     yearConstraction?: number;
+
+    typeComputer?:string;
+    producer?:string;
+    screenDiagonal?:number;
+    operatingSystem?:string;
+    cpu?:string;
+    clockFrequency?:number;
+    ram?:number;
+    gpyType?:string;
+    gpu?:string;
+    storageType?:string;
+    storageCapacity?:number;
+    componentType?:string;
+    condition?:string;
 
 
     constructor(

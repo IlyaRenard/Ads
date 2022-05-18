@@ -33,7 +33,7 @@
                 </button>
             </mat-form-field>
         </div>
-        <button mat-stroked-button color="accent" class="btn-block" (click)="authService.SignUp(email.value,password.value,userName.value,phoneNumber.value)">
+        <button mat-stroked-button color="accent" class="btn-block" (click)="authService.SignUp(email.value,password.value,userName.value,phoneNumber.value)" routerLink="/">
             Registration
         </button>
     </mat-card>

@@ -1,20 +1,19 @@
-<!-- <mat-toolbar color="primary" class="app-header">
-    <span class="nav-tool-items">
-    <a mat-button routerLink="" routerLinkActive="active">Home</a>
-    <a mat-button *ngIf="this.authService.userData" routerLink="addAd" routerLinkActive="active">Add ad</a>
-    <a mat-button *ngIf="this.authService.userData" routerLink="profile" routerLinkActive="active">Profile</a>
-    <a mat-button *ngIf="!this.authService.userData" routerLink="login" routerLinkActive="active">Log in</a>
-    <a mat-button *ngIf="!this.authService.userData" mat-raised-button routerLink="register"
-      routerLinkActive="active">Register</a>
-  </span>
-</mat-toolbar>
- -->
 <mat-toolbar color="primary" class="app-header">
+
     <span class="nav-tool-items" *ngFor="let header of headerConfig">
-      
-    <a mat-button routerLink={{header.routerPath}} routerLinkActive="active">{{header.title}}</a>
-  </span>
-    <mat-form-field>
-        <input type="text" matInput placeholder="Search" [(ngModel)]="searchField" (keyup.enter)="search()">
+        <a mat-button *ngIf="header.isVisible" routerLink={{header.routerPath}}
+            routerLinkActive="active">{{header.title}}</a>
+    </span>
+
+    <mat-form-field appearance="fill" *ngIf="this.authService.userData">
+        <input type="text" matInput placeholder="Search" [(ngModel)]="searchField" class="form-control" (keyup.enter)="searchByTitle()">
     </mat-form-field>
+    <div>
+        <button mat-button [matMenuTriggerFor]="menu">Category</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="searchByCategory('Realty')">Realty</button>
+            <button mat-menu-item (click)="searchByCategory('Computer')">Computer</button>
+        </mat-menu>
+    </div>
+
 </mat-toolbar>
